@@ -36,6 +36,9 @@
 		E03B7BE41BF5B08E00D14992 /* GCDQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03B7BE01BF5B08E00D14992 /* GCDQueue.swift */; };
 		E03B7BE51BF5B08E00D14992 /* GCDSemaphore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03B7BE11BF5B08E00D14992 /* GCDSemaphore.swift */; };
 		E03B7BE61BF5B08E00D14992 /* GCDTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03B7BE21BF5B08E00D14992 /* GCDTimer.swift */; };
+		E06A09221C0D4A81008395B8 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06A091E1C0D4A81008395B8 /* ImageModel.swift */; };
+		E06A092A1C0D89BA008395B8 /* DecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E06A09291C0D89BA008395B8 /* DecorationView.swift */; };
+		E06A092C1C0D8D17008395B8 /* BookShelf.png in Resources */ = {isa = PBXBuildFile; fileRef = E06A092B1C0D8D17008395B8 /* BookShelf.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +91,9 @@
 		E03B7BE01BF5B08E00D14992 /* GCDQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDQueue.swift; sourceTree = "<group>"; };
 		E03B7BE11BF5B08E00D14992 /* GCDSemaphore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDSemaphore.swift; sourceTree = "<group>"; };
 		E03B7BE21BF5B08E00D14992 /* GCDTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDTimer.swift; sourceTree = "<group>"; };
+		E06A091E1C0D4A81008395B8 /* ImageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
+		E06A09291C0D89BA008395B8 /* DecorationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecorationView.swift; sourceTree = "<group>"; };
+		E06A092B1C0D8D17008395B8 /* BookShelf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BookShelf.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,9 +128,8 @@
 			children = (
 				E03B7B911BF57AFA00D14992 /* AppDelegate.swift */,
 				E03B7B931BF57AFB00D14992 /* ViewController.swift */,
-				E03B7BA61BF58B6000D14992 /* WaterfallCell.swift */,
-				E03B7BA81BF5904900D14992 /* CollectionHeaderView.swift */,
-				E03B7BAA1BF5909300D14992 /* CollectionFooterView.swift */,
+				E06A09241C0D72F7008395B8 /* View */,
+				E06A09251C0D7306008395B8 /* Model */,
 				E03B7BE71BF5B09100D14992 /* GCD */,
 				E03B7BDE1BF5B02800D14992 /* SDWebImage */,
 				E03B7BA51BF58B1800D14992 /* CHTCollectionViewWaterfallLayout */,
@@ -196,6 +201,26 @@
 			name = GCD;
 			sourceTree = "<group>";
 		};
+		E06A09241C0D72F7008395B8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E03B7BA61BF58B6000D14992 /* WaterfallCell.swift */,
+				E03B7BA81BF5904900D14992 /* CollectionHeaderView.swift */,
+				E03B7BAA1BF5909300D14992 /* CollectionFooterView.swift */,
+				E06A09291C0D89BA008395B8 /* DecorationView.swift */,
+				E06A092B1C0D8D17008395B8 /* BookShelf.png */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		E06A09251C0D7306008395B8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E06A091E1C0D4A81008395B8 /* ImageModel.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -255,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E03B7B9C1BF57AFB00D14992 /* LaunchScreen.storyboard in Resources */,
+				E06A092C1C0D8D17008395B8 /* BookShelf.png in Resources */,
 				E03B7B991BF57AFB00D14992 /* Assets.xcassets in Resources */,
 				E03B7B971BF57AFB00D14992 /* Main.storyboard in Resources */,
 			);
@@ -283,6 +309,7 @@
 				E03B7B941BF57AFB00D14992 /* ViewController.swift in Sources */,
 				E03B7BDA1BF5B01B00D14992 /* UIImage+WebP.m in Sources */,
 				E03B7BDC1BF5B01B00D14992 /* UIImageView+WebCache.m in Sources */,
+				E06A09221C0D4A81008395B8 /* ImageModel.swift in Sources */,
 				E03B7BD21BF5B01B00D14992 /* SDWebImageDecoder.m in Sources */,
 				E03B7B921BF57AFA00D14992 /* AppDelegate.swift in Sources */,
 				E03B7BCE1BF5B01B00D14992 /* MKAnnotationView+WebCache.m in Sources */,
@@ -292,6 +319,7 @@
 				E03B7BAB1BF5909300D14992 /* CollectionFooterView.swift in Sources */,
 				E03B7BD91BF5B01B00D14992 /* UIImage+MultiFormat.m in Sources */,
 				E03B7BDB1BF5B01B00D14992 /* UIImageView+HighlightedWebCache.m in Sources */,
+				E06A092A1C0D89BA008395B8 /* DecorationView.swift in Sources */,
 				E03B7BD81BF5B01B00D14992 /* UIImage+GIF.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -447,6 +475,7 @@
 				E03B7BA21BF57AFB00D14992 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

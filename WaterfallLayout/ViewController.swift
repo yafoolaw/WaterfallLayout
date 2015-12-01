@@ -15,9 +15,10 @@ let sourceUrl = "http://www.duitang.com/album/1733789/masn/p/0/100/"
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout {
     
-    var collectionView: UICollectionView?
-    var dataSource:     [AnyObject]? = Array()
-    var sizeSource:     [AnyObject]? = Array()
+    var collectionView : UICollectionView?
+    var dataSource     : [AnyObject]? = Array()
+    var sizeSource     : [AnyObject]? = Array()
+    var layout         : CHTCollectionViewWaterfallLayout?
 
     override func viewDidLoad() {
         
@@ -26,23 +27,22 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         buildCollectionView()
         
         loadData()
-
     }
     
     func buildCollectionView() {
     
         // 初始化布局
-        let layout = CHTCollectionViewWaterfallLayout()
+        layout = CHTCollectionViewWaterfallLayout()
         
-        layout.sectionInset            = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) // section 内边距
-        layout.headerHeight            = 40 // HeaderView高度
-        layout.footerHeight            = 40 // FooterView高度
-        layout.columnCount             = 3  // 几列显示
-        layout.minimumColumnSpacing    = 5  // cell之间的水平间距
-        layout.minimumInteritemSpacing = 5  // cell之间的垂直间距
+        layout!.sectionInset            = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) // section 内边距
+        layout!.headerHeight            = 40 // HeaderView高度
+        layout!.footerHeight            = 40 // FooterView高度
+        layout!.columnCount             = 3  // 几列显示
+        layout!.minimumColumnSpacing    = 5  // cell之间的水平间距
+        layout!.minimumInteritemSpacing = 5  // cell之间的垂直间距
         
         // 初始化CollectionView
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout!)
         
         collectionView?.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         collectionView?.dataSource       = self
@@ -50,14 +50,18 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         collectionView?.backgroundColor  = UIColor.whiteColor()
         
         // 注册Cell HeaderView FooterView
-        collectionView?.registerClass(WaterfallCell.classForCoder(), forCellWithReuseIdentifier: cellIdentifier)
-        collectionView?.registerClass(CollectionHeaderView.classForCoder(), forSupplementaryViewOfKind: layout.CHTCollectionElementKindSectionHeader, withReuseIdentifier: headerIdentifier)
-        collectionView?.registerClass(CollectionFooterView.classForCoder(), forSupplementaryViewOfKind: layout.CHTCollectionElementKindSectionFooter, withReuseIdentifier: footerIdentifier)
+        collectionView?.registerClass(WaterfallCell.classForCoder(),
+            forCellWithReuseIdentifier: cellIdentifier)
+        collectionView?.registerClass(CollectionHeaderView.classForCoder(),
+            forSupplementaryViewOfKind: layout!.CHTCollectionElementKindSectionHeader, withReuseIdentifier: headerIdentifier)
+        collectionView?.registerClass(CollectionFooterView.classForCoder(),
+            forSupplementaryViewOfKind: layout!.CHTCollectionElementKindSectionFooter, withReuseIdentifier: footerIdentifier)
         
         view.addSubview(collectionView!)
     }
     
     func loadData() {
+        
     
         GCDQueue.globalQueue .excute { () -> Void in
             
@@ -74,8 +78,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                     let temp = value as! [String : AnyObject]
                     
                     print(temp["isrc"])
-                    self.dataSource?.append(temp["isrc"]!)
-                    
+                    self.dataSource?.append(ImageModel(dictionary: temp)!)
                 }
             }
             
@@ -86,7 +89,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             })
         }
     }
-    
     
     // MARK: UICollectionViewDataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -103,21 +105,36 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         let waterCell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as! WaterfallCell
         
-        waterCell.showImageView?.sd_setImageWithURL(NSURL(string: self.dataSource![indexPath.row] as! String))
+        let imageModel : ImageModel = self.dataSource![indexPath.row] as! ImageModel;
+        
+        waterCell.showImageView?.sd_setImageWithURL(NSURL(string: imageModel.isrc!));
         
         return waterCell
+    }
+    
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         
+        var reusableView : UICollectionReusableView?
+        
+        if kind == layout!.CHTCollectionElementKindSectionHeader {
+        
+            reusableView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerIdentifier, forIndexPath: indexPath)
+            
+        } else {
+        
+            reusableView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: footerIdentifier, forIndexPath: indexPath)
+        }
+        
+        return reusableView!
     }
     
     // MARK: CHTCollectionViewDelegateWaterfallLayout
     func collectionView (collectionView: UICollectionView,layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-    
-            let image = UIImage.sd_imageWithData(NSData(contentsOfURL: NSURL(string: self.dataSource![indexPath.row] as! String)!)!)
-            
-            return image!.size
-            
-    }
 
+       let imageModel : ImageModel = self.dataSource![indexPath.row] as! ImageModel
+            
+       return CGSize(width: CGFloat(imageModel.iwd!), height: CGFloat(imageModel.iht!))
+    }
 }
 

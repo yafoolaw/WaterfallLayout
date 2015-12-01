@@ -19,10 +19,12 @@ class CollectionFooterView: UICollectionReusableView {
         
         super.init(frame: frame)
         
-        self.layer.borderWidth = 0.5
+        self.layer.borderWidth = 1
+        self.backgroundColor   = UIColor.purpleColor()
     }
     
     required init?(coder aDecoder: NSCoder) {
+        
         fatalError("init(coder:) has not been implemented")
     }
 }

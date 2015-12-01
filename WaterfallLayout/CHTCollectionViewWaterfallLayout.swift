@@ -109,6 +109,9 @@ class CHTCollectionViewWaterfallLayout : UICollectionViewLayout{
         sectionItemAttributes = NSMutableArray()
         
         super.init()
+        
+        // 刘大帅添加
+        self.registerClass(DecorationView.classForCoder(), forDecorationViewOfKind: "DecorationView")
     }
     
     required init(coder aDecoder: NSCoder) {
