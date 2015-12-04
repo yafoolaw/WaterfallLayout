@@ -62,7 +62,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func loadData() {
         
-    
         GCDQueue.globalQueue .excute { () -> Void in
             
             // 获取json数据
